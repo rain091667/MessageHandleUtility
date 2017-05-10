@@ -8,6 +8,14 @@
 
 ![](https://raw.githubusercontent.com/rain091667/MessageHandleUtility/master/ScreenDemo/SampleScreenServer.png)
 
+## Installation
+
+Install as [NuGet package](https://www.nuget.org/packages/MessageHandleUtility/1.0.0.3/):
+
+```powershell
+Install-Package MessageHandleUtility
+```
+
 
 # Usage
 
