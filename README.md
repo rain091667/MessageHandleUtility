@@ -6,12 +6,15 @@
 
 ![](https://github.com/rain091667/MessageHandleUtility/blob/master/ScreenDemo/SampleScreen.gif)
 
+![](https://github.com/rain091667/MessageHandleUtility/blob/master/ScreenDemo/SampleScreenServer.png)
+
+
 ## Usage
 
 ### DLL Reference
 	
 ```csharp
-	using MessageHandleUtility;
+using MessageHandleUtility;
 ```
 
 ### Implement IMessageSocketSession
@@ -95,12 +98,13 @@ class MessageControler : IMessageHandler
 }
 ```
 
+
 ## Structure Message
 
 ### JSON Message - Structure
 ```csharp
-	using System.Runtime.Serialization;
-	using MessageHandleUtility.Utility;
+using System.Runtime.Serialization;
+using MessageHandleUtility.Utility;
 ```
 
 ```csharp
