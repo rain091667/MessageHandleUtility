@@ -2,9 +2,17 @@
 
     C# Socket Message Module
 	
-![](https://github.com/rain091667/AndroidBloodProgressView/raw/master/ScreenDemo/screen.gif)
+## Chat Message Client Server DEMO
+
+![](https://github.com/rain091667/MessageHandleUtility/blob/master/ScreenDemo/SampleScreen.gif)
 
 ## Usage
+
+### DLL Reference
+	
+```csharp
+	using MessageHandleUtility;
+```
 
 ### Implement IMessageSocketSession
 ```csharp
@@ -72,4 +80,75 @@ class MessageControler : IMessageHandler
 		// Example:
 		mMessageControler.SendMessage("Message");
 	}
+```
+
+### Receive Message
+```csharp
+class MessageControler : IMessageHandler
+{
+	public override void OnMessageReceive(IMessageContent msg)
+	{
+		TimeSpan? time = msg.Data_TimeSpanInstance; // Time
+		string time_String = msg.Data_TimeTick_String; // Time
+		string MessageContent = msg.Data_MessageContent; // Message
+	}
+}
+```
+
+## Structure Message
+
+### JSON Message - Structure
+```csharp
+	using System.Runtime.Serialization;
+	using MessageHandleUtility.Utility;
+```
+
+```csharp
+[DataContract]
+class MessageContract
+{
+	[DataMember(Name = "Name")]
+	public string Name { get; set; }
+
+	[DataMember(Name = "PhoneNumber")]
+	public string PhoneNumber { get; set; }
+	
+	[DataMember(Name = "Message")]
+	public string Message { get; set; }
+
+	public MessageContract()
+	{
+		Name = string.Empty;
+		PhoneNumber = string.Empty;
+		Message = string.Empty;
+	}
+}
+```
+
+### JSON Message - Send
+```csharp
+	MessageContract mContract = new MessageContract();
+	mContract.Name = "Name";
+	mContract.PhoneNumber = "123456789";
+	mContract.Message = "Your Message.";
+	
+	string JSONString = SerializeUtility.Serialize(mContract);
+	if (mMessageControler.IsSendAvailable)
+	{
+		mMessageControler.SendMessage(JSONString);
+	}
+```
+
+### JSON Message - Receive
+```csharp
+class MessageControler : IMessageHandler
+{
+	public override void OnMessageReceive(IMessageContent msg)
+	{
+		MessageContract data = SerializeUtility.DeSerialize<MessageContract>(msg.Data_MessageContent);
+		string Name = data.Name; // receive: Name
+		string PhoneNumber = data.PhoneNumber; // receive: 123456789
+		string Message = data.Message; // receive: Your Message.
+	}
+}
 ```
