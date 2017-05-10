@@ -4,14 +4,14 @@
 	
 ## Chat Message Client Server DEMO
 
-![](https://github.com/rain091667/MessageHandleUtility/blob/master/ScreenDemo/SampleScreen.gif)
+![](https://raw.githubusercontent.com/rain091667/MessageHandleUtility/master/ScreenDemo/SampleScreen.gif)
 
-![](https://github.com/rain091667/MessageHandleUtility/blob/master/ScreenDemo/SampleScreenServer.png)
+![](https://raw.githubusercontent.com/rain091667/MessageHandleUtility/master/ScreenDemo/SampleScreenServer.png)
 
 
-## Usage
+# Usage
 
-### DLL Reference
+## DLL Reference
 	
 ```csharp
 using MessageHandleUtility;
@@ -99,7 +99,7 @@ class MessageControler : IMessageHandler
 ```
 
 
-## Structure Message
+# Structure Message
 
 ### JSON Message - Structure
 ```csharp
