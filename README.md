@@ -7,7 +7,7 @@
 ## Usage
 
 ### Implement IMessageSocketSession
-```c-sharp
+```csharp
 class ConnectionHandle : IMessageSocketSession
 {
 	void OnNewConnection(string TargetID, IMessageSocketInformation info, out bool AcceptFlag)
@@ -28,14 +28,14 @@ class ConnectionHandle : IMessageSocketSession
 	void OnConnectFailed(string TargetID, IMessageSocketInformation info)
 	{
 		// TargetID (連線 ID), info (對方連線的基本資訊)
-		// 在進行連接的時候如果失敗，通知連線失敗。
+		// 進行連接時失敗，通知連線失敗。
 	}
 }
 ```
 
 
 ### Implement IMessageHandler
-```c-sharp
+```csharp
 class MessageControler : IMessageHandler
 {
 	public override void OnMessageReceive(IMessageContent msg)
@@ -43,4 +43,33 @@ class MessageControler : IMessageHandler
 		// 當有訊息接收時，通知該實體。
 	}
 }
+```
+
+### init
+
+```csharp
+	string LocalID = "yourID";
+	string ListenDeviceID = "ListenDeviceID";
+	ConnectionHandle ConnectionHandleManager = new ConnectionHandle();
+	MessageSocketManager manager = new MessageSocketManager(LocalID, ConnectionHandleManager);
+	MessageControler mMessageControler = new MessageControler();
+	manager.addMessageHandler(ListenDeviceID, mMessageControler);
+```
+
+### Establish Connection
+
+```csharp
+	string Server_IP = "IP"; // Ex: 127.0.0.1, 192.168.1.2
+	ushort Server_Port = 38500;
+	string[] Descriptions = new string[] { "message", "message2" };
+	manager.Connect(new IPHostEndPoint(Server_IP, Server_Port), Descriptions); 
+```
+
+### Send Message
+```csharp
+	if (mMessageControler.IsSendAvailable)
+	{
+		// Example:
+		mMessageControler.SendMessage("Message");
+	}
 ```
